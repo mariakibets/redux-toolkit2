@@ -1,16 +1,29 @@
-import React from 'react'
+import React from 'react';
+import { connect } from 'react-redux';
+import { increment, decrement } from '../../store/slices/counterSlice';
 
-const Counter = () => {
+
+
+const Counter = (props) => {
+  console.log(props);
+  const { count, step, dispatch } = props
   return (
-
     <div>
-      <p> count: {1} </p>
-      <p>Step: {2} </p>
-      <button>Increment</button>
-      <button>Decrement</button>
+      <p> count: {count} </p>
+      <p>Step: {step} </p>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
     </div>
 
   );
 }
 
-export default Counter;
+function  mapStateToProps (state){
+  return state
+}
+
+// const whithState = connect(mapStateToProps);
+
+// const counterWithState = whithState(Counter);
+
+export default connect(mapStateToProps)(Counter);
