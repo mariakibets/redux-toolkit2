@@ -6,7 +6,7 @@ import { increment, decrement, setStep } from '../../store/slices/counterSlice';
 
 const Counter = (props) => {
   console.log(props);
-  const { count, step, dispatch, incrementCb, decrementCb, setStepCb} = props
+  const { count, step, dispatch, increment, decrement, setStep} = props
   return (
     <div>
       <p> count: {count} </p>
@@ -15,11 +15,11 @@ const Counter = (props) => {
         <input
          type="number" 
          value={step}
-         onChange={setStepCb}/>
+         onChange={({target: {value}}) => setStep(value)}/>
       </label>
       <p>Step: {step} </p>
-      <button onClick={incrementCb}>Increment</button>
-      <button onClick={decrementCb}>Decrement</button>
+      <button onClick={() => increment()}>Increment</button>
+      <button onClick={() => decrement()}>Decrement</button>
     </div>
 
   );
@@ -32,17 +32,21 @@ function  mapStateToProps (state){
   }
 }
 
+//v1
+// function  mapDispatchToProps (dispatch) {
+//   return {
+//       incrementCb: () =>  dispatch(increment()),
+//       decrementCb: () => dispatch(decrement()),
+//       setStepCb: ({target: {value}}) => dispatch(setStep(value))
+//     }
+//   }
 
-function  mapDispatchToProps (dispatch) {
-  return {
-      incrementCb: () =>  dispatch(increment()),
-      decrementCb: () => dispatch(decrement()),
-      setStepCb: ({target: {value}}) => dispatch(setStep(value))
-    }
-  }
 
-// const whithState = connect(mapStateToProps);
-
-// const counterWithState = whithState(Counter);
+//v2
+ const mapDispatchToProps = {
+  increment,
+  decrement,
+  setStep
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
