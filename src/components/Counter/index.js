@@ -6,7 +6,7 @@ import CONSTANTS from '../../constants';
 
 const {
   LANGUAGE: {
-    EN_US, UA_UA, AR, HE
+    EN_US, UA_UA
   },
   LANGUAGE
 } = CONSTANTS
