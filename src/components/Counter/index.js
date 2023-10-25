@@ -6,7 +6,7 @@ import { increment, decrement, setStep } from '../../store/slices/counterSlice';
 
 const Counter = (props) => {
   console.log(props);
-  const { count, step, dispatch } = props
+  const { count, step, dispatch, incrementCb, decrementCb, setStepCb} = props
   return (
     <div>
       <p> count: {count} </p>
@@ -15,11 +15,11 @@ const Counter = (props) => {
         <input
          type="number" 
          value={step}
-         onChange={({target: {value}}) => dispatch(setStep(value))}/>
+         onChange={setStepCb}/>
       </label>
       <p>Step: {step} </p>
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <button onClick={incrementCb}>Increment</button>
+      <button onClick={decrementCb}>Decrement</button>
     </div>
 
   );
@@ -32,8 +32,17 @@ function  mapStateToProps (state){
   }
 }
 
+
+function  mapDispatchToProps (dispatch) {
+  return {
+      incrementCb: () =>  dispatch(increment()),
+      decrementCb: () => dispatch(decrement()),
+      setStepCb: ({target: {value}}) => dispatch(setStep(value))
+    }
+  }
+
 // const whithState = connect(mapStateToProps);
 
 // const counterWithState = whithState(Counter);
 
-export default connect(mapStateToProps)(Counter);
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
