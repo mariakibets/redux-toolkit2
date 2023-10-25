@@ -1,8 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReeduser from './slices/counterSlice';
+import langReducer from './slices/langSlice';
 
 const store = configureStore({
-    reducer: counterReeduser
+    reducer: {
+            counter: counterReeduser,
+            lang: langReducer
+    }
 });
 
 export default store
