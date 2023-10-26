@@ -1,14 +1,15 @@
 import React from 'react'
+import styles from './Hader.module.scss';
 
 const Header = () => {
   return (
-   <header>
+   <header className={styles.header}>
     <h1>My Site</h1>
         <nav>
-            <ul>
-                <li>1</li>
-                <li>2</li>
-                <li>31</li>
+            <ul className={styles.navList}>
+                <li className={styles.navListItem}>Link 1</li>
+                <li className={styles.navListItem}>Link 2</li>
+                <li className={styles.navListItem}>Liink 3</li>
             </ul>
         </nav>
         <div>
