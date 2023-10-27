@@ -1,8 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { increment, decrement, setStep } from '../../store/slices/counterSlice';
+import * as counterActionCreators from '../../store/slices/counterSlice';
 import { bindActionCreators } from '@reduxjs/toolkit';
-import { setLang } from '../../store/slices/langSlice';
+import * as langActionCreators from '../../store/slices/langSlice';
 import CONSTANTS from '../../constants';
 import cx from 'classnames';
 import styles from './Counter.module.scss';
@@ -46,9 +46,9 @@ const Counter = (props) => {
 
   const dispatch = useDispatch();
 
-  const actionCreators =  bindActionCreators(
-    {setLang, setStep, increment, decrement},
-    dispatch
+  const {setLang, setStep, increment, decrement} =  bindActionCreators(
+      {...counterActionCreators, ...langActionCreators},
+      dispatch
     )
 
   const translation = translations.get(language);
@@ -63,7 +63,7 @@ const Counter = (props) => {
 
   return (
     <div className={className}>
-      <select value={language} onChange={({target: {value}}) => actionCreators.setLang(value)}>
+      <select value={language} onChange={({target: {value}}) => setLang(value)}>
         {Object.values(LANGUAGE).map((langObj) => (
           <option key={langObj.VALUE} value={langObj.VALUE}>{langObj.OPTION_TEXT}</option>
         ))}
@@ -74,11 +74,11 @@ const Counter = (props) => {
         <input
          type="number" 
          value={step}
-         onChange={({target: {value}}) => actionCreators.setStep(value)}/>
+         onChange={({target: {value}}) => setStep(value)}/>
       </label>
       <p>{stepText}: {step} </p>
-      <button onClick={() => actionCreators.increment()}>{incrementText}</button>
-      <button onClick={() => actionCreators.decrement()}>{decermentText}</button>
+      <button onClick={() => increment()}>{incrementText}</button>
+      <button onClick={() => decrement()}>{decermentText}</button>
     </div>
 
   );
