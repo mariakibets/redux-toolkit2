@@ -1,14 +1,19 @@
 import React from 'react'
 import styles from './Hader.module.scss';
 import cx from 'classnames';
-import { connect } from 'react-redux';
+import { useSelector, useDispatch} from 'react-redux';
 import CONSTANTS from '../../constants';
 import { setTheme } from '../../store/slices/themeSlice';
 
 
+
 const { THEMES } = CONSTANTS;
 
-const Header = ({theme, setTheme, language}) => {
+const Header = (props) => {
+
+  const theme = useSelector((state) => state.theme);
+
+  const dispatch = useDispatch();
 
    const className = cx( styles.header, {
      [styles.darkTheme] : theme === THEMES.DARK,
@@ -27,23 +32,23 @@ const Header = ({theme, setTheme, language}) => {
             </ul>
         </nav>
         <div>
-            <button onClick={() => setTheme()}>Switch theme</button>
+            <button onClick={() => dispatch(setTheme())}>Switch theme</button>
         </div>
    </header>
   )
 }
 
-const mStP = (state) => {
-    return{
-        theme: state.theme,
-        language: state.lang
-    }
-}
+// const mStP = (state) => {
+//     return{
+//         theme: state.theme,
+//         language: state.lang
+//     }
+// }
 
-const mDtP = (dispatch) => {
-    return{
-        setTheme: () => dispatch(setTheme())
-    }
-}
+// const mDtP = (dispatch) => {
+//     return{
+//         setTheme: () => dispatch(setTheme())
+//     }
+// }
 
-export default connect(mStP, mDtP)(Header);
+export default (Header);
