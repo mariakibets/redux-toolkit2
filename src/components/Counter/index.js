@@ -41,7 +41,7 @@ const Counter = (props) => {
   const { count, step, dispatch, languaage, theme,  increment, decrement, setStep, setLang} = props;
   const translation = translations.get(languaage);
   const{ countText, stepText, incrementText, decermentText} = translation
-    console.log(props);
+    // console.log(props);
 
     const className = cx({
       [styles.darkTheme] : theme === THEMES.DARK,
