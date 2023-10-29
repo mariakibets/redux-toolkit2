@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector} from 'react-redux';
+import { getUsers } from '../../store/slices/userSlice'
 
 const UserList = (props) => {
-    const [users, setUsers] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
+
+    const {users, isLoading, error} = useSelector(state => state.users);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getUsers());
+    }, [])
+
 
     return (
         <section>
