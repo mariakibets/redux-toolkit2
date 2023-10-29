@@ -3,6 +3,7 @@ import CounterPage from "./pages/CounterPage";
 import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import UserPage from "./pages/UserPage";
+import ITConsultingPage from "./pages/Services/ITConsulting";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <Route exact path='/' component={HomePage}/>
       <Route path='/counter' component={CounterPage}/>
       <Route path='/users' component={UserPage}/>
+      <Route path='/it-consulting' component={ITConsultingPage}/>
       <Route path='*' component={NotFoundPage}/>
     </Switch>
   );
