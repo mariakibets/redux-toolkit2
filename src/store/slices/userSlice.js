@@ -16,15 +16,17 @@ const initialState = {
 const userSlice = createSlice({
     name: SLICE_NAME,
     initialState,
-    extraReducers: {
-        [getUsers.pending]: (state, action) => {
+    extraReducers: (builder) => {
+        builder.addCase(getUsers.pending, (state, action) => {
             state.isLoading = true;
-        },
-        [getUsers.fulfilled]: (state, action) => {
-            state.users = action.payload;
+        });
+
+        builder.addCase(getUsers.fulfilled, (state, action) => {
             state.isLoading = false;
-        }
-    }
+            state.users = action.payload;
+        })
+    },
+        
     
 })
 
